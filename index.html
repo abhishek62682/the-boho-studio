@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+
+    <!-- Odometer Plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <title>Camlens Films</title>
+    
+    <style type="text/tailwindcss">
+        @theme {
+            --color-accent-bg: #C98A69;
+            --color-accent-text: #F6F1EB;
+            --max-w-8xl: 1440px;
+        }
+    </style>
+
+    <style>
+        html, body { 
+            width: 100%; 
+            height: 100%;  
+        } #navbar.hidden-nav {
+        transform: translateY(-110%);
+      }
+
+        @font-face {
+            font-family: 'Soligant';
+            src: url('./assets/font/Soligant.otf');
+        }
+
+        .font-primary {
+            font-family: 'Soligant', serif;
+        }
+
+        body {
+            background-color: #F6F1EB;
+            font-family: "Inter", sans-serif;
+        }
+
+        .swiper { 
+            width: 100%; 
+            height: 100%; 
+        }
+
+        .swiper-slide { 
+            width: 100%; 
+            height: 100%; 
+        }
+
+        .swiper-slide img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after { 
+            display: none; 
+        }
+
+        .thumbnail-btn img {
+            transition: opacity 0.3s, border-color 0.3s;
+        }
+
+        .thumbnail-btn:hover img { 
+            opacity: 0.8; 
+        }
+
+        .thumbnail-btn.active-thumb img {
+            opacity: 1;
+            border-color: #fff !important;
+        }
+
+        #navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transform: translateY(0);
+            transition: transform 0.35s ease, background 0.3s ease;
+        }
+
+        #navbar.hidden-nav {
+            transform: translateY(-110%);
+        }
+
+        .yt-embed-wrap {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .yt-embed-wrap iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Odometer Styling */
+        .odometer {
+            font-size: 3rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .odometer.odometer-auto-theme, .odometer.odometer-theme-default{
+             font-family: "Inter", sans-serif !important;
+
+        }
+        @media (max-width: 768px) {
+            .odometer {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .odometer {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black">
+    <div class="root">
+
+        <!-- HERO SECTION  -->
+        <div class="relative w-full h-[100svh] overflow-hidden">
+
+            <!-- NAVBAR -->
+            <nav id="navbar" class="z-[999999] pt-3 sm:pt-5 px-4 sm:px-6 md:px-10">
+                <div class="flex items-center justify-between bg-black/70 backdrop-blur-md border border-white/10 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-2.5">
+                    
+                    <!-- Logo -->
+                    <a href="/" class="flex items-center gap-2 sm:gap-3">
+                        <img class="w-15" src="/ChatGPT Image Jun 23, 2026, 03_15_59 PM.png" alt="Camlens Logo" />
+                    </a>
+
+                    <!-- Desktop Menu -->
+                    <ul class="hidden lg:flex items-center justify-center flex-1 gap-6 lg:gap-8">
+                        <li><a href="/" class="text-sm text-white/90 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-sm text-white/90 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-sm text-white/90 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#why-choose-us" class="text-sm text-white/90 hover:text-white transition-colors">Why Choose Us</a></li>
+                        <li><a href="#gallery" class="text-sm text-white/90 hover:text-white transition-colors">Our Work</a></li>
+                        <li><a href="#testimonials" class="text-sm text-white/90 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-sm text-white/90 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+
+                    <!-- CTA & Mobile Menu -->
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <a href="#contact" class="hidden group relative overflow-hidden transition-all duration-300 sm:block bg-white text-black text-xs sm:text-sm font-medium px-4 sm:px-6 py-2 rounded-lg">
+                            <span class="absolute inset-0 translate-y-full bg-black transition-transform duration-300 ease-out group-hover:translate-y-0"></span>
+                            <span class="relative z-10 transition-colors duration-300 group-hover:text-white">Book a Session</span>
+                        </a>
+                        <button onclick="openSidebar()" class="lg:hidden flex flex-col gap-1 p-2" aria-label="Open menu">
+                            <span class="block w-5 h-0.5 bg-white rounded"></span>
+                            <span class="block w-5 h-0.5 bg-white rounded"></span>
+                            <span class="block w-4 h-0.5 bg-white rounded"></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- MAIN SWIPER -->
+            <div class="swiper mainSwiper absolute inset-0 w-full h-full">
+                <div class="swiper-wrapper">
+                     <div class="swiper-slide">
+                        <img src="https://static.wixstatic.com/media/c33238_295be364138845409c9883c2b85c4691~mv2.jpg/v1/fill/w_2840,h_1470,q_90,enc_avif,quality_auto/c33238_295be364138845409c9883c2b85c4691~mv2.jpg" alt="Frame 3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/assets/img/hero/hero-slide-01.jpg" alt="Frame 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="/assets/img/hero/hero-slide-02.jpg" alt="Frame 2">
+                    </div>
+                   
+                </div>
+            </div>
+
+            <!-- OVERLAY -->
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+
+            <!-- CENTERED TEXT -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center z-20 px-4 sm:px-8 text-center">
+                <div class="max-w-3xl w-full">
+                    <div id="el-heading" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-widest uppercase font-primary font-bold text-white mb-3 sm:mb-4"></div>
+                    <div id="el-body" class="text-base sm:text-lg md:text-xl text-center text-gray-300 font-light max-w-xl mx-auto px-2"></div>
+                </div>
+            </div>
+
+            <!-- BOTTOM ROW - Responsive -->
+<div class="absolute bottom-0 w-full z-30 px-4 sm:px-6 md:px-10 pb-6 sm:pb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+
+    <!-- THUMBNAILS -->
+    <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto flex-1 sm:flex-none">
+        <div class="thumbnail-btn cursor-pointer flex-1 sm:flex-none" data-index="0">
+            <img class="w-full sm:w-28 h-16 sm:h-16 object-cover rounded border-2 sm:border-[1px] border-transparent" src="https://static.wixstatic.com/media/c33238_295be364138845409c9883c2b85c4691~mv2.jpg/v1/fill/w_2840,h_1470,q_90,enc_avif,quality_auto/c33238_295be364138845409c9883c2b85c4691~mv2.jpg" alt="Thumb 3">
+        </div>
+        <div class="thumbnail-btn active-thumb cursor-pointer flex-1 sm:flex-none" data-index="1">
+            <img class="w-full sm:w-28 h-16 sm:h-16 object-cover rounded border-2 sm:border-[1px] border-white" src="/assets/img/hero/hero-slide-01.jpg" alt="Thumb 1">
+        </div>
+        <div class="thumbnail-btn cursor-pointer flex-1 sm:flex-none" data-index="2">
+            <img class="w-full sm:w-28 h-16 sm:h-16 object-cover rounded border-2 sm:border-[1px] border-transparent" src="/assets/img/hero/hero-slide-02.jpg" alt="Thumb 2">
+        </div>
+        
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div class="hidden md:flex items-center gap-2 sm:gap-3">
+        <button class="custom-prev w-9 sm:w-11 h-9 sm:h-11 flex items-center justify-center rounded-full backdrop-blur-md bg-white/15 hover:bg-white/30 border border-white/20 text-white transition-all duration-200 hover:scale-105">
+            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <button class="custom-next w-9 sm:w-11 h-9 sm:h-11 flex items-center justify-center rounded-full backdrop-blur-md bg-white/15 hover:bg-white/30 border border-white/20 text-white transition-all duration-200 hover:scale-105">
+            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
+    </div>
+
+</div>
+        </div>
+
+        <!-- ABOUT SECTION  -->
+        <section id="about" class="py-16 sm:py-20 md:py-30 px-4 sm:px-6 md:px-10 bg-accent-text">
+            <div class="max-w-7xl mx-auto space-y-12 md:space-y-16">
+
+                <!-- Header -->
+                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+                    <h2 class="font-primary text-3xl sm:text-4xl  font-semibold leading-tight">
+                        Celebrating Motherhood, One <br> Beautiful Moment At A Time.
+                    </h2>
+                    <p class="w-full lg:max-w-[640px] font-normal text-sm sm:text-base leading-relaxed text-gray-700">
+                        From the anticipation of pregnancy to the joy of welcoming your little one and watching them grow, every chapter deserves to be remembered. We specialize in maternity, newborn, baby milestone, and family photography, creating timeless images filled with genuine emotion and beautiful storytelling. Trusted by over 800 moms across Surat, Mumbai, and Ahmedabad, we're dedicated to preserving the moments you'll cherish for a lifetime.
+                    </p>
+                </div>
+
+                <!-- Stats Grid - Responsive with Odometer -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+
+                    <div class="col-span-1 space-y-4 sm:space-y-6 min-h-[180px] flex flex-col justify-end rounded-lg sm:rounded-2xl bg-white p-4 sm:p-6">
+                        <div class="flex items-baseline gap-1 sm:gap-2">
+                            <span class="odometer font-normal " data-odometer-final="800">0</span>
+                            <span class=" text-lg sm:text-2xl">+</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base font-medium text-gray-700">Trusted Moms</p>
+                    </div>
+
+                    <div class="col-span-1 space-y-4 sm:space-y-6 min-h-[180px] flex flex-col justify-end rounded-lg sm:rounded-2xl bg-white p-4 sm:p-6">
+                        <div class="flex items-baseline gap-1 sm:gap-2">
+                            <span class="odometer " data-odometer-final="1500">0</span>
+                            <span class=" text-lg sm:text-2xl">+</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base font-medium text-gray-700">Maternity, Newborn </p>
+                    </div>
+
+                    <div class="col-span-1 space-y-4 sm:space-y-6 min-h-[180px] flex flex-col justify-end rounded-lg sm:rounded-2xl bg-white p-4 sm:p-6">
+                        <div class="flex items-baseline gap-1 sm:gap-2">
+                            <span class="odometer " data-odometer-final="3">0</span>
+                            
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base font-medium text-gray-700">Cities Served</p>
+                    </div>
+
+                    <div class="col-span-1 space-y-4 sm:space-y-6 min-h-[180px] flex flex-col justify-end rounded-lg sm:rounded-2xl bg-white p-4 sm:p-6">
+                        <div class="flex items-baseline gap-1 sm:gap-2">
+                            <span class="odometer " data-odometer-final="8">0</span>
+                            <span class=" text-lg sm:text-2xl">+</span>
+                        </div>
+                        <p class="text-xs sm:text-sm md:text-base font-medium text-gray-700">Years of Experience</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--  FILMS/PORTFOLIO SECTION -->
+        <section id="portfolio" class="relative overflow-hidden z-20 bg-accent-bg py-16 sm:py-20 md:py-30">
+            <div class="px-4 sm:px-6 md:px-8 lg:px-2">
+                <div class="w-full rounded-lg sm:rounded-2xl overflow-hidden">
+
+                    <!-- Header -->
+                    <div class="text-center pb-8 sm:pb-10 ">
+                        <h2 class="font-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight uppercase text-accent-text px-4">
+                            Beautiful Weddings, <br/>Breathtaking Films
+                        </h2>
+                    </div>
+
+                    <!-- Swiper Carousel -->
+                    <div class="relative px-4 sm:px-6 md:px-8">
+                        <div class="swiper filmsSwiper relative overflow-visible pb-8">
+                            <div class="swiper-wrapper items-stretch gap-4">
+
+                                <!-- Slide 1 -->
+                                <div class="swiper-slide flex flex-col gap-4">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img src="https://images-pw.pixieset.com/elementfield/0kWk4w/Sample155-515d1797-2500.jpg" class="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover" alt="Nishant & Priya"/>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                    <div class="content mt-6">
+                                        <h3 class="text-accent-text text-xl sm:text-2xl leading-tight font-normal uppercase">Nishant <span>&</span> Priya</h3>
+                                        <p class="text-xs sm:text-sm text-white/70">May 10, 2026</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 2 -->
+                                <div class="swiper-slide flex flex-col gap-4">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img src="https://images-pw.pixieset.com/elementfield/0kWk4w/Sample135-8e8492b3-2500.jpg" class="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover" alt="Rohan & Simran"/>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                    <div class="content mt-6">
+                                        <h3 class="text-accent-text text-xl sm:text-2xl leading-tight font-normal uppercase">Rohan <span>&</span> Simran</h3>
+                                        <p class="text-xs sm:text-sm text-white/70">May 10, 2026</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 3 -->
+                                <div class="swiper-slide flex flex-col gap-4">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img src="https://images-pw.pixieset.com/elementfield/0kWk4w/Sample151-934573e9-1500.jpg" class="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover" alt="Arjun & Meera"/>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                    <div class="content mt-6">
+                                        <h3 class="text-accent-text text-xl sm:text-2xl leading-tight font-normal uppercase">Arjun <span>&</span> Meera</h3>
+                                        <p class="text-xs sm:text-sm text-white/70">May 10, 2026</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 4 -->
+                                <div class="swiper-slide flex flex-col gap-4">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img src="https://images-pw.pixieset.com/elementfield/0kWk4w/Sample14-8e4e9e3c-1500.jpg" class="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover" alt="Dev & Ananya"/>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                    <div class="content mt-6">
+                                        <h3 class="text-accent-text text-xl sm:text-2xl leading-tight font-normal uppercase">Dev <span>&</span> Ananya</h3>
+                                        <p class="text-xs sm:text-sm text-white/70">May 10, 2026</p>
+                                    </div>
+                                </div>
+
+                                <!-- Slide 5 -->
+                                <div class="swiper-slide flex flex-col gap-4">
+                                    <div class="relative overflow-hidden rounded-lg">
+                                        <img src="https://images-pw.pixieset.com/elementfield/0kWk4w/Sample155-61f2f11a-1500.jpg" class="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover" alt="Kabir & Zara"/>
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                                    </div>
+                                    <div class="content mt-6">
+                                        <h3 class="text-accent-text text-xl sm:text-2xl leading-tight font-normal uppercase">Kabir <span>&</span> Zara</h3>
+                                        <p class="text-xs sm:text-sm text-white/70">May 10, 2026</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <button class="custom-prev films-prev w-9 sm:w-11 absolute left-0 sm:left-2 -translate-y-1/2 top-1/2 z-10 h-9 sm:h-11 flex items-center justify-center rounded-full backdrop-blur-md bg-white/15 hover:bg-white/30 border border-white/20 text-white transition-all duration-200 hover:scale-105">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="custom-next films-next w-9 sm:w-11 absolute right-0 sm:right-2 -translate-y-1/2 top-1/2 z-10 h-9 sm:h-11 flex items-center justify-center rounded-full backdrop-blur-md bg-white/15 hover:bg-white/30 border border-white/20 text-white transition-all duration-200 hover:scale-105">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+       
+
+        <!--  GALLERY SECTION  -->
+        <section id="gallery" class="py-16 sm:py-20 md:py-30 px-4 sm:px-6 md:px-8 lg:px-12 bg-accent-text">
+            <div class="max-w-7xl mx-auto">
+
+                <!-- Header -->
+                <div class="text-center pb-8 sm:pb-12 space-y-3 sm:space-y-4">
+                    <h2 class="font-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight uppercase text-accent-bg">
+                        Celebrating Love <br/>with Every Frame
+                    </h2>
+                    <p class="font-normal text-sm sm:text-base leading-relaxed text-gray-700 max-w-2xl mx-auto">
+                        Explore our collection of candid moments, intimate details, and breathtaking scenes that define each couple's unique love story.
+                    </p>
+                </div>
+
+                <!-- Gallery Grid - Fully Responsive -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 auto-rows-[200px] sm:auto-rows-[250px] md:auto-rows-[280px]">
+
+                    <!-- Large Item 1 (spans 2 cols on md+) -->
+                    <div class="col-span-2 md:col-span-2 md:row-span-2 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://images.squarespace-cdn.com/content/v1/6744250b81521d675423a80c/aa7f8e49-eb0b-47ed-8642-7746b6d8c5f4/276A4545-Edit.jpg?format=750w" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://images.squarespace-cdn.com/content/v1/6744250b81521d675423a80c/44dc6229-19fc-4483-b19e-7e3e2fa66fe6/Wedding-at-bayview-34-980x653.jpg?format=750w" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2025/05/02-Wedding-394-1536x1022.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2023/09/2Engagement-197-2-1536x1022.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2023/09/5Wedding-232-1536x1022.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 6 (spans 2 cols) -->
+                    <div class="col-span-2 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2023/09/PurvaRohanWedding-481-1536x1024.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 7 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2025/05/03-Haldi-99-1536x1022.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                    <!-- Item 8 -->
+                    <div class="col-span-1 rounded-xl sm:rounded-2xl overflow-hidden group cursor-pointer">
+                        <img src="https://marshmallowstudios.in/wp-content/uploads/2023/09/PurvaRohanWedding-335-1536x1024.jpg" alt="Wedding" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+<footer class="relative overflow-hidden bg-[#1a3d35] py-14 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10">
+
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <svg class="w-full h-full" viewBox="0 0 1440 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="200" cy="200" rx="180" ry="280" fill="none" stroke="#C98A69" stroke-width="1.5" transform="rotate(-30 200 200)" opacity="0.5"/>
+            <ellipse cx="200" cy="200" rx="80" ry="200" fill="none" stroke="#C98A69" stroke-width="1" transform="rotate(-30 200 200)" opacity="0.3"/>
+            <ellipse cx="1240" cy="200" rx="180" ry="280" fill="none" stroke="#C98A69" stroke-width="1.5" transform="rotate(30 1240 200)" opacity="0.5"/>
+            <ellipse cx="1240" cy="200" rx="80" ry="200" fill="none" stroke="#C98A69" stroke-width="1" transform="rotate(30 1240 200)" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 items-center">
+
+        <!-- Left: Tagline + Socials -->
+        <div class="flex flex-col items-center md:items-start gap-6 text-center md:text-left">
+            <p class="text-white/70 text-sm sm:text-base leading-relaxed max-w-xs">
+                Bumps, babies & beyond every milestone deserves to be beautifully remembered. Trusted by 800+ moms across Surat, Mumbai & Ahmedabad.
+            </p>
+            <div class="flex items-center gap-4">
+                <a href="https://www.instagram.com/boho_studio.in/" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-accent-bg hover:border-accent-bg transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="https://www.instagram.com/the_boho_films/" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-accent-bg hover:border-accent-bg transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#1a3d35"/></svg>
+                </a>
+                <a href="https://wa.me/919316756055" target="_blank" class="w-9 h-9 flex items-center justify-center rounded-full border border-white/20 text-white/70 hover:text-accent-bg hover:border-accent-bg transition-colors duration-200">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Center: Logo -->
+        <div class="flex justify-center">
+            <img src="/ChatGPT Image Jun 23, 2026, 03_15_59 PM.png" alt="The Boho Studio" class="w-36 sm:w-40 md:w-44 object-contain">
+        </div>
+
+        <!-- Right: Contact Info -->
+        <div class="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
+            <p class="text-white/50 text-xs tracking-widest uppercase font-medium">Contact Info</p>
+            <p class="text-white/80 text-sm sm:text-base font-light">Surat · Mumbai · Ahmedabad</p>
+            <a href="https://wa.me/919316756055" target="_blank" class="text-white/80 text-sm sm:text-base font-light hover:text-accent-bg transition-colors duration-200">+91 93167 56055</a>
+            <a href="https://www.instagram.com/the_boho_films/" target="_blank" class="text-accent-bg text-sm sm:text-base hover:text-white transition-colors duration-200">@the_boho_films</a>
+        </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="relative max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-center">
+        <p class="text-white/30 text-xs">© 2026 The Boho Studio. All rights reserved.</p>
+        <p class="text-white/30 text-xs">Crafted with ♥ by <span class="text-accent-bg">Raino Studios</span></p>
+    </div>
+
+</footer>
+        
+
+
+       
+
+    
+    </div>
+
+   
+
+    <!--  SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js"></script>
+
+
+<!-- Smooth Scroll Library -->
+<script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+
+<script>
+  (() => {
+  const lenis = new Lenis({ autoRaf: true });
+
+  // document.getElementById("year").textContent = new Date().getFullYear();
+
+  
+
+  
+})();
+</script>
+
+    <script>
+        // Hero Slider Data
+        const slides = [
+            {
+                heading: "Stories Worth Reliving",
+                body: "Where emotions become timeless films and every celebration is transformed into a cinematic masterpiece."
+            },
+            {
+                heading: "Moments Beyond Time",
+                body: "Authentic emotions, beautiful details, and unforgettable memories preserved with artistic excellence."
+            },
+            {
+                heading: "Crafted With Passion",
+                body: "Blending creativity and storytelling to create visuals that you'll cherish for generations."
+            }
+        ];
+
+        const elHeading = document.getElementById("el-heading");
+        const elBody = document.getElementById("el-body");
+
+        let headingSplit, bodySplit;
+
+        function animateIn(index, delay = 0.45) {
+            const d = slides[index];
+
+            gsap.killTweensOf([elHeading, elBody]);
+
+            if (headingSplit) headingSplit.revert();
+            if (bodySplit) bodySplit.revert();
+
+            elHeading.textContent = d.heading;
+            elBody.textContent = d.body;
+
+            headingSplit = new SplitText(elHeading, {
+                type: "lines",
+                mask: "lines"
+            });
+
+            bodySplit = new SplitText(elBody, {
+                type: "lines",
+                mask: "lines"
+            });
+
+            const tl = gsap.timeline();
+
+            tl.from(headingSplit.lines, {
+                y: 100,
+                duration: 0.9,
+                ease: "power4.out",
+            }, 0.1);
+
+            tl.from(bodySplit.lines, {
+                y: 100,
+                duration: 0.9,
+                ease: "power4.out",
+            }, 0.3);
+        }
+
+        // Main Swiper
+        const mainSwiper = new Swiper(".mainSwiper", {
+            loop: true,
+            effect: "fade",
+            fadeEffect: { crossFade: true },
+            speed: 900,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            on: {
+                slideChange() {
+                    updateThumbs(this.realIndex);
+                    animateIn(this.realIndex, 0.4);
+                }
+            }
+        });
+
+        function updateThumbs(active) {
+            document.querySelectorAll(".thumbnail-btn").forEach((t, i) => {
+                const img = t.querySelector("img");
+                if (i === active) {
+                    t.classList.add("active-thumb");
+                    img.style.borderColor = "#fff";
+                } else {
+                    t.classList.remove("active-thumb");
+                    img.style.borderColor = "transparent";
+                }
+            });
+        }
+
+        document.querySelectorAll(".thumbnail-btn").forEach(t => {
+            t.addEventListener("click", () => mainSwiper.slideToLoop(+t.dataset.index));
+        });
+
+        document.querySelector(".custom-prev").addEventListener("click", () => mainSwiper.slidePrev());
+        document.querySelector(".custom-next").addEventListener("click", () => mainSwiper.slideNext());
+
+        animateIn(0, 0.2);
+
+        // Films Swiper
+        const filmsSwiper = new Swiper('.filmsSwiper', {
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 16,
+            autoplay: false,
+            speed: 600,
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 16,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 24,
+                },
+                1280: {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                },
+            },
+            navigation: {
+                nextEl: '.films-next',
+                prevEl: '.films-prev',
+            },
+        });
+
+        // Odometer Animation on Scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const odometers = entry.target.querySelectorAll('.odometer');
+                    odometers.forEach(odometer => {
+                        const finalValue = odometer.getAttribute('data-odometer-final');
+                        odometer.innerHTML = finalValue;
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('#about');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+
+    <script>
+
+       window.addEventListener(
+    "scroll",
+    () => {
+      const current = window.scrollY;
+      
+      if (current <= 60) {
+        navbar.classList.remove("hidden-nav");
+      } else if (current > lastScroll) {
+        navbar.classList.add("hidden-nav");
+      } else {
+        navbar.classList.remove("hidden-nav");
+      }
+      lastScroll = current;
+    },
+    { passive: true }
+  );
+    </script>
+</body>
+
+</html>
